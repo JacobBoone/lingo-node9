@@ -1,4 +1,15 @@
 extends layout
 
 block content
-	h1 Hello Boulder!
+	.container
+		h1 Translate Page
+
+		form#translate-form(action="/transalate" method="post")
+			.form-group
+				input.form-control(name="languageOfOrigin" type="text" placeholder="Language of Origin")
+			.form-group
+				textarea.form-control(name="targetLanguage" type="text" placeholder="Target Language")
+			.form-group
+				textarea.form-control(name="word" type='text' placeholder="Translation")
+			.form-group
+				input.btn.btn-default(type="submit")
