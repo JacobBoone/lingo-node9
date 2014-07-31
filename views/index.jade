@@ -6,13 +6,25 @@ block content
 
 		form#translate-form(action="/translate" method="post")
 			.form-group
-				input.form-control(name="from" type="text" placeholder="Language of Origin")
+				input.form-control(name="from" type="text" placeholder="Language of Origin" value="eng") 
 			.form-group
-				input.form-control(name="to" type="text" placeholder="Target Language")
+				input.form-control(name="to" type="text" placeholder="Target Language" value="fra") 
 			.form-group
 				textarea.form-control(name="text" type='text' placeholder="Translation")
 			.form-group
 				input.btn.btn-default(type="submit")
+
+	.container
+		h1 Quiz
+
+		form#quiz-form(action="/quiz" method="post")
+			.form-group
+				input.form-control(name="lang" type="text" placeholder="Which language?")
+			.form-group
+				input.btn.btn-default(type="submit")
+
+	.container
+		ol
 
 block scripts
 	script(src='/scripts/index.js')

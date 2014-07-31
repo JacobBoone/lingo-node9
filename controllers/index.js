@@ -19,6 +19,7 @@ var indexController = {
 		{text: req.body.word , from: req.body.fromLang , to: req.body.toLang},
 		function(err, results) {
 		    if (err) {
+		      res.send({});
 		      return console.log(err);
 		    }
 
@@ -26,6 +27,21 @@ var indexController = {
 	  		});
 
 
+	},
+	quizTranslate: function(req, res) {
+
+
+		beglobal.translations.translate(
+		{text: req.body.textArea , from: req.body.from , to: req.body.selectedLang},
+
+		function(err, results) {
+		    if (err) {
+		      res.send({});
+		      return console.log(err);
+		    }
+
+		    res.send(results);
+	  		});
 	}
 };
 
