@@ -4,12 +4,15 @@ block content
 	.container
 		h1 Translate Page
 
-		form#translate-form(action="/transalate" method="post")
+		form#translate-form(action="/translate" method="post")
 			.form-group
-				input.form-control(name="languageOfOrigin" type="text" placeholder="Language of Origin")
+				input.form-control(name="from" type="text" placeholder="Language of Origin")
 			.form-group
-				textarea.form-control(name="targetLanguage" type="text" placeholder="Target Language")
+				input.form-control(name="to" type="text" placeholder="Target Language")
 			.form-group
-				textarea.form-control(name="word" type='text' placeholder="Translation")
+				textarea.form-control(name="text" type='text' placeholder="Translation")
 			.form-group
 				input.btn.btn-default(type="submit")
+
+block scripts
+	script(src='/scripts/index.js')
