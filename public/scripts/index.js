@@ -8,6 +8,7 @@ $(function(){
 		var fromLang = 	$('[name=from]').val()
 		var toLang = $('[name=to]').val()
 		var word = $('[name=text]').val()
+		var current = $(this)
 
 		console.log(fromLang, toLang, word)		
 
@@ -15,7 +16,8 @@ $(function(){
 			console.log('data', data)
 
 			if(data.translation !== word) {
-			$('body').append(data.translation)
+			// $('body').append(data.translation)
+			current.find('.answer').text(data.translation)
 			} 
 			else {
 				$('body').append('Sorry, Dude.  No such word.')
