@@ -1,3 +1,4 @@
+var counter = 0;
 $(function(){
 
 	$('#translate-form').on('submit', function(e){
@@ -25,27 +26,6 @@ $(function(){
 	})
 
 
-	$('ol').on('click', '.answer', function(e) {
-		e.preventDefault();
-		
-		var from = 'eng'
-		var textArea = $(this).siblings('.subWord').val()
-		var selectedLang = 	$('[name=lang]').val()
-		var word = $(this).siblings('.randomWord').text()
-		console.log('done')
-		
-		var current = $(this)
-		$.post('/answerTranslate', {from: from, selectedLang: selectedLang, textArea: textArea, word: word}, function(data) {
-			console.log('data', data);
-			current.after(data.translation)
-		})
-		// if(data.translation !== word) {
-		// 	$('body').append(data.translation)
-		// 	} 
-		// else {
-		// 		$('body').append('Sorry, Dude.  No such word.')
-		// 	}
-	})
 
 	$('#quiz-form').on('submit', function(e){
 		e.preventDefault();
@@ -58,12 +38,50 @@ $(function(){
 		$.post('/quizsubmit', function(data){
 			for(var i=0; i<data.length; i++){
 				var word=data[i];
-			$('ol').append('<li class="bob"><span class="randomWord">' + word + '</span><br><textarea class="subWord"></textarea><br><button type="submit" class="answer">Submit Answer</button>');
+			$('ol').append('<li class="bob"><span class="randomWord">' + word + '</span><br><textarea class="subWord"></textarea><br><button type="submit" class="answer">Submit Answer</button><div class="output"></div>');
 			}
 
 
 		}
 		)
+	});
+	$('ol').on('click', '.answer', function(e) {
+		e.preventDefault();
+		
+		var from = 'eng'
+		var textArea = $(this).siblings('.subWord').val()
+		var selectedLang = 	$('[name=lang]').val()
+		var word = $(this).siblings('.randomWord').text()
+		console.log('done')
+		var current = $(this)
+		if(textArea.toLowerCase()=== word.toLowerCase()){
+			current.siblings('.output').text(textArea + ' is incorrect!')
+			return
+		}
+		
+		$.post('/answerTranslate', {from: from, selectedLang: selectedLang, textArea: textArea, word: word}, function(data) {
+			console.log('data', data);
+			// current.siblings('.output').text(data.translation)
+
+			if(data.translation.toLowerCase() === word){
+				current.siblings('.output').text(textArea + ' is correct!')
+
+			}
+			else{
+				current.siblings('.output').text(textArea + ' is incorrect!')
+				counter++
+			}
+
+
+			if(counter ===3){
+				// window.location.href = 'http://www.google.com'
+				alert("You missed too many dumbass, start over!")
+					window.location.reload();
+				
+
+			}
+		})
+
 	});
 })
 

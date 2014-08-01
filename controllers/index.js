@@ -32,7 +32,7 @@ var indexController = {
 
 
 		beglobal.translations.translate(
-		{text: req.body.textArea , from: req.body.from , to: req.body.selectedLang},
+		{text: req.body.textArea , from: req.body.selectedLang , to: req.body.from},
 
 		function(err, results) {
 		    if (err) {
